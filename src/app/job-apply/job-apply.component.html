@@ -1,0 +1,87 @@
+<div class="container">
+  <h2>Apply</h2>
+  <p>
+    Fill the following details
+  </p>
+
+  <form [formGroup]="applyForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-25">
+        <label for="name">Name</label>
+      </div>
+      <div class="col-75">
+        <input
+          id="name"
+          type="text"
+          formControlName="Name"
+          placeholder="Your full name.."
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="date">Date of birth</label>
+      </div>
+      <div class="col-75">
+        <input
+          id="date"
+          type="text"
+          formControlName="Date"
+          placeholder="Your date of birth.."
+          [matDatepicker]="datepicker"
+          (click)="datepicker.open()"
+        />
+        <mat-datepicker #datepicker></mat-datepicker>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="pob">Place of birth</label>
+      </div>
+      <div class="col-75">
+        <input
+          id="pob"
+          type="text"
+          formControlName="POB"
+          placeholder="Your place of birth.."
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="pob">Department</label>
+      </div>
+      <div class="col-75">
+        <select id="department" formControlName="Department">
+          <option *ngFor="let department of departments" [value]="department.key">{{department.value}}</option>
+        </select>
+      </div>
+    </div>
+    <div *ngIf="!fileUploaded" class="row">
+      <div class="col-25">
+        <label for="pob">Upload CV</label>
+      </div>
+      <div class="col-75">
+        <input
+          id="upload-cv"
+          type="file"
+          name="upload-cv"
+          accept=".pdf"
+          (change)="handleFileUpload($event.target)"
+        />
+      </div>
+    </div>
+    <div *ngIf="fileUploaded" class="row">
+      <div class="col-25">
+        <label for="pob">Uploaded File</label>
+      </div>
+      <div class="col-75">
+        <input id="filepath" type="text" formControlName="FilePath" />
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <input type="submit" value="Submit" />
+    </div>
+  </form>
+</div>

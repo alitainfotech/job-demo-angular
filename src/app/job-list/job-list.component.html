@@ -1,0 +1,40 @@
+<div class="container">
+  <h2>Candidates</h2>
+  <table id="customers">
+    <tr>
+      <th>Name</th>
+      <th>Date of birth</th>
+      <th>Place of birth</th>
+      <th>Department</th>
+      <th>Download CV</th>
+      <th>Action</th>
+    </tr>
+    <ng-container *ngIf="data.length > 0">
+      <tr *ngFor="let d of data">
+        <td>{{d.name}}</td>
+        <td>{{d.date | date}}</td>
+        <td>{{d.pob}}</td>
+        <td>{{showDepartment(d.department)}}</td>
+        <td>
+          <button
+            type="button"
+            class="button"
+            (click)="handleDownloadClick(d.filePath)"
+          >
+            Download
+          </button>
+        </td>
+        <td>
+          <button type="button" class="button" (click)="handleDelete(d.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+    <ng-container *ngIf="data.length <= 0">
+      <tr>
+        <td colspan="6">No records found!</td>
+      </tr>
+    </ng-container>
+  </table>
+</div>
